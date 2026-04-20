@@ -1,0 +1,34 @@
+DevToys Java
+Copyright 2026 The DevToys Java Authors
+
+This product includes software developed by Takeshi Inoue
+and the DevToys Java contributors.
+
+This project is a Java port of DevToys
+(https://github.com/DevToys-app/DevToys), originally developed by
+Etienne Baudoux and the DevToys .NET contributors, licensed under
+the Apache License, Version 2.0.
+
+============================================================
+Third-party libraries
+============================================================
+
+This product bundles, depends on, or redistributes the following
+third-party libraries. Each is used under its own license.
+
+JavaFX           (GPL-2.0 with Classpath Exception)
+    https://openjfx.io
+AtlantaFX        (MIT)
+    https://github.com/mkpaz/atlantafx
+Jackson          (Apache-2.0)
+    https://github.com/FasterXML/jackson
+SLF4J            (MIT)
+    https://slf4j.org
+Logback          (EPL-1.0 or LGPL-2.1)
+    https://logback.qos.ch
+Ikonli           (Apache-2.0)
+    https://kordamp.org/ikonli
+Picocli          (Apache-2.0)
+    https://picocli.info
+JUnit Jupiter    (EPL-2.0)
+    https://junit.org/junit5

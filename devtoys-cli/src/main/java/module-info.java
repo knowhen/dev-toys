@@ -10,6 +10,7 @@
 module io.devtoys.cli {
     requires io.devtoys.api;
     requires io.devtoys.tools;
+    requires com.fasterxml.jackson.core;
     requires info.picocli;
     requires org.slf4j;
 

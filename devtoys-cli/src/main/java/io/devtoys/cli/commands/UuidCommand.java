@@ -33,11 +33,9 @@ public final class UuidCommand implements Callable<Integer> {
     private boolean upper;
 
     // Picocli supports --no-<option> automatically when negatable = true (since 4.0)
-    @Option(names = {"--hyphens"},
-            description = "Include hyphens (default: true). Use --no-hyphens for compact form.",
-            negatable = true,
-            defaultValue = "true")
-    private boolean hyphens;
+    @Option(names = {"--no-hyphens"},
+            description = "Omit hyphens (produce compact 32-char hex).")
+    private boolean noHyphens;
 
     @Option(names = {"-b", "--braces"},
             description = "Wrap each UUID in {curly braces}.")
@@ -45,7 +43,7 @@ public final class UuidCommand implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        UuidCore.Format fmt = new UuidCore.Format(upper, hyphens, braces);
+        UuidCore.Format fmt = new UuidCore.Format(upper, !noHyphens, braces);
         UuidCore.generate(count, fmt).forEach(System.out::println);
         return 0;
     }

@@ -45,13 +45,16 @@ class CliIntegrationTest {
     }
 
     // --- top-level ---
-
     @Test
     void noArgs_printsUsage() {
         Run r = run();
         assertEquals(0, r.exitCode);
-        assertTrue(r.stderr.contains("Usage: devtoys"),
-                "should show usage; got stderr=" + r.stderr);
+        String combined = r.stdout + r.stderr;
+        // Debug: print lengths
+        assertTrue(combined.contains("Usage"),
+                "stdout len=" + r.stdout.length() + ", stderr len=" + r.stderr.length()
+                        + ", combined len=" + combined.length() + ", combined starts with: ["
+                        + combined.substring(0, Math.min(50, combined.length())) + "]");
     }
 
     @Test

@@ -17,5 +17,7 @@ module io.devtoys.plugin.loader {
     requires com.fasterxml.jackson.annotation;
     requires org.slf4j;
 
+    uses io.devtoys.api.IGuiTool;
+
     exports io.devtoys.plugin;
 }

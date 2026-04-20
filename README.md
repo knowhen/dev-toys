@@ -1,11 +1,14 @@
 # DevToys Java
 
 [![CI](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
 > Replace `YOUR_USERNAME/YOUR_REPO` above with your actual GitHub path, e.g. `johndoe/devtoys-java`.
 
 A Java port of [DevToys](https://github.com/DevToys-app/DevToys), built with
 **JavaFX 21 + AtlantaFX 2**.
+
+Want to contribute? See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 This is a **skeleton**: plugin architecture + UI shell + 5 starter tools
 (JSON, Base64, Hash, UUID, Regex), plus phase-1 infrastructure (persistent

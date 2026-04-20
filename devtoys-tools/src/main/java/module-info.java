@@ -20,7 +20,7 @@ module io.devtoys.tools {
     requires io.devtoys.api;
     requires io.devtoys.core;                         // for BackgroundTaskRunner
     requires com.fasterxml.jackson.databind;
-    requires com.fasterxml.jackson.core;
+    requires transitive com.fasterxml.jackson.core;
     requires org.slf4j;
 
     exports io.devtoys.tools.base64;
