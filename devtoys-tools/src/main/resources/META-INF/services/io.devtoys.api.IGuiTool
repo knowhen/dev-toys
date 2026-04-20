@@ -1,0 +1,12 @@
+io.devtoys.tools.base64.Base64Tool
+io.devtoys.tools.json.JsonFormatterTool
+io.devtoys.tools.hash.HashTool
+io.devtoys.tools.uuid.UuidTool
+io.devtoys.tools.regex.RegexTool
+io.devtoys.tools.urlcodec.UrlCodecTool
+io.devtoys.tools.htmlentity.HtmlEntityTool
+io.devtoys.tools.timestamp.TimestampTool
+io.devtoys.tools.numberbase.NumberBaseTool
+io.devtoys.tools.loremipsum.LoremIpsumTool
+io.devtoys.tools.password.PasswordTool
+io.devtoys.tools.color.ColorTool

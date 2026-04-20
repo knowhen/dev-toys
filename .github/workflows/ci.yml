@@ -1,0 +1,66 @@
+#
+# CI workflow for DevToys Java.
+#
+# Runs on every push to master and every pull request. Builds the full
+# Maven reactor (all 6 modules) and runs all tests on both Linux and
+# Windows in parallel.
+#
+# When tests fail, the Surefire reports are uploaded as artifacts so you
+# can download them from the Actions UI and investigate without having to
+# reproduce the failure locally.
+#
+
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:   # allow manual trigger from the Actions tab
+
+# Cancel in-progress runs of the same workflow on the same branch/PR when
+# a new commit is pushed. Saves CI minutes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false   # if Linux fails, still run Windows — more diagnostic info
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'   # caches ~/.m2/repository keyed on all pom.xml hashes
+
+      - name: Show environment
+        run: |
+          java -version
+          mvn -version
+
+      - name: Build and test
+        run: mvn -B --no-transfer-progress clean install
+
+      # Always upload test reports — even on success, so you can drill into
+      # skipped tests or slow ones. Surefire's per-module default directory.
+      - name: Upload Surefire reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports-${{ matrix.os }}
+          path: '**/target/surefire-reports/**'
+          if-no-files-found: ignore
+          retention-days: 7

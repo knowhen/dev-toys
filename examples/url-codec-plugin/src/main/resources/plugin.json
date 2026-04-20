@@ -1,0 +1,9 @@
+{
+  "id": "io.example.url-codec",
+  "name": "URL Codec",
+  "version": "1.0.0",
+  "author": "DevToys Java",
+  "description": "URL (percent-)encode and decode text. UTF-8 only.",
+  "homepage": "https://github.com/DevToys-app/DevToys",
+  "minHostVersion": "0.1.0"
+}

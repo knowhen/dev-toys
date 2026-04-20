@@ -1,0 +1,9 @@
+{
+  "id": "io.example.hello",
+  "name": "Hello World",
+  "version": "1.0.0",
+  "author": "DevToys Java",
+  "description": "Minimal example plugin that adds a single 'Hello' tool.",
+  "homepage": "https://github.com/DevToys-app/DevToys",
+  "minHostVersion": "0.1.0"
+}

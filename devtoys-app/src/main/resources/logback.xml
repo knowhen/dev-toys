@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Our own packages get DEBUG by default so tool authors see useful output
+         without wiring config themselves. Bump to INFO for release builds. -->
+    <logger name="io.devtoys" level="DEBUG"/>
+
+    <!-- Quiet noisy third-parties. -->
+    <logger name="org.openjfx" level="WARN"/>
+    <logger name="com.fasterxml.jackson" level="WARN"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

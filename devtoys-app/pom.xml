@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.devtoys</groupId>
+        <artifactId>devtoys-java-parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>devtoys-app</artifactId>
+    <name>DevToys Java - Desktop Shell</name>
+    <description>Main desktop application. JavaFX + AtlantaFX shell, navigation, and main class.</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.devtoys</groupId>
+            <artifactId>devtoys-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.devtoys</groupId>
+            <artifactId>devtoys-tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.devtoys</groupId>
+            <artifactId>devtoys-plugin-loader</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.mkpaz</groupId>
+            <artifactId>atlantafx-base</artifactId>
+        </dependency>
+
+        <!-- Icons: core + JavaFX integration + three icon packs -->
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fluentui-pack</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fontawesome5-pack</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-material2-pack</artifactId>
+        </dependency>
+
+        <!-- Logging: SLF4J (API pulled via core) + Logback impl at runtime -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>devtoys-app</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>io.devtoys.app/io.devtoys.app.Launcher</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>package</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>javafx-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>jlink-image</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jlink</goal>
+                                </goals>
+                                <configuration>
+                                    <mainClass>io.devtoys.app/io.devtoys.app.Launcher</mainClass>
+                                    <launcher>devtoys</launcher>
+                                    <jlinkImageName>app</jlinkImageName>
+                                    <jlinkZipName>app</jlinkZipName>
+                                    <noManPages>true</noManPages>
+                                    <noHeaderFiles>true</noHeaderFiles>
+                                    <stripDebug>true</stripDebug>
+                                    <compress>2</compress>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.3.0</version>
+                        <executions>
+                            <execution>
+                                <id>jpackage</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>${java.home}/bin/jpackage</executable>
+                                    <arguments>
+                                        <argument>--name</argument>
+                                        <argument>DevToys</argument>
+                                        <argument>--app-version</argument>
+                                        <argument>0.1.0</argument>
+                                        <argument>--vendor</argument>
+                                        <argument>DevToys Java</argument>
+                                        <argument>--runtime-image</argument>
+                                        <argument>${project.build.directory}/app</argument>
+                                        <argument>--module</argument>
+                                        <argument>io.devtoys.app/io.devtoys.app.Launcher</argument>
+                                        <argument>--dest</argument>
+                                        <argument>${project.build.directory}/installer</argument>
+                                        <argument>--win-menu</argument>
+                                        <argument>--win-shortcut</argument>
+                                        <argument>--win-dir-chooser</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

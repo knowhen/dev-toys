@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Keep the CLI quiet by default. Commands should write their real output
+  to stdout, and error messages to stderr directly (not via a logger).
+  Users who want debug logs can -Dlogback.configurationFile=... override this.
+-->
+<configuration>
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder>
+            <pattern>%-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Only warnings and errors by default -->
+    <root level="WARN">
+        <appender-ref ref="STDERR"/>
+    </root>
+
+    <!-- Our own classes can be a tad more verbose if debugging -->
+    <logger name="io.devtoys" level="WARN"/>
+</configuration>
