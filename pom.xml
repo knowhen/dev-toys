@@ -124,6 +124,11 @@
                 <artifactId>devtoys-tools</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.devtoys</groupId>
+                <artifactId>devtoys-plugin-loader</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- Testing -->
             <dependency>

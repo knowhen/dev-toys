@@ -59,7 +59,13 @@ public final class JsonFormatterTool implements IGuiTool {
             boolean format = "Format".equals(mode.getValue());
             int indentN = indent.getValue() == null ? 2 : indent.getValue();
             runner.run(
-                    () -> doOperation(src, format, indentN),
+                    () -> {
+                        try {
+                            return doOperation(src, format, indentN);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    },
                     r -> {
                         output.setText(r.text);
                         status.setText(r.status);
